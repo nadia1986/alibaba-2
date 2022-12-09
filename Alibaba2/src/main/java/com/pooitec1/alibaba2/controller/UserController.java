@@ -1,0 +1,51 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.pooitec1.alibaba2.controller;
+
+import com.pooitec1.alibaba2.entity.User;
+import com.pooitec1.alibaba2.service.UserService;
+
+/**
+ *
+ * @author nadia
+ */
+public class UserController {
+        private User userSelected;
+
+    private UserService service;
+    
+
+    public UserController() {        
+        this.service = new UserService();
+    }
+
+
+    public User login(User userAux){
+        User userEncontrado = null;
+        for (User ur: this.service.getUsers()) {
+            if (ur.getNickname().equals(userAux.getNickname())){
+                if (ur.getPassword().equals(userAux.getPassword())){
+                    userEncontrado = ur;
+                }else{
+                    System.out.println("la contraseña es invalida");
+                }
+            }else{
+                System.out.println("el usuario no existe");
+            }
+        }
+
+        return userEncontrado;
+    }
+
+    public User getUserSelected() {
+        return userSelected;
+    }
+
+    public void setUserSelected(User userSelected) {
+        this.userSelected = userSelected;
+    }
+    
+    
+}
