@@ -32,6 +32,30 @@ public class LoteProductService {
         this.service = new ProductService();
 
     }
+    
+    
+    //BUSCO UN PRODUCTO POR DESCRIPCION
+       public List<LoteProduct> findByProductDescription(String description) {
+        List<LoteProduct> productsfound = new ArrayList<>();
+
+        for (LoteProduct productSearch : stockRepository.findStockProductEntities()) {
+            if (productSearch.getProduct().getDescription().contains(description)) {
+                productsfound.add(productSearch);
+            }
+        }
+        return  productsfound;
+    }
+       
+       
+    //FALTA AGREGAR QUE BUSQUE POR CODIGO Y TRAIGA UN SOLO PRODUCTO
+       
+     
+       
+         public List<LoteProduct> getLoteProduct() {
+        List<LoteProduct> listLoteProducts = stockRepository.findStockProductEntities();
+        return listLoteProducts;
+
+    }
 
     // El purchase suma al stock
     public void addPurchaseStock(Purchase purchase) {
@@ -43,6 +67,23 @@ public class LoteProductService {
     public void addSaleStock(Sale sale) {
 
     }
+    
+    
+    //
+    public List<LoteProduct> findByProduct(Product product){
+       List<LoteProduct> stockProductfound = new ArrayList<>();
+        for (LoteProduct stockPr : this.stockRepository.findStockProductEntities()) {
+            if (stockPr.getProduct().equals(product)) {
+              stockProductfound.add(stockPr);
+
+            }
+
+        }
+
+        return stockProductfound;
+
+    }   
+    
     
     
     //creo una funcion o agrego una  nueva clase PrecioProducto con precioVenta y precioCompra???
@@ -60,9 +101,6 @@ public class LoteProductService {
     }
     
     
-    
-   
-
     
 
     // desconat stock producto disponible

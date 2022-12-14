@@ -8,6 +8,7 @@ import com.pooitec1.alibaba2.controller.PurchaseController;
 import com.pooitec1.alibaba2.controller.SaleController;
 import com.pooitec1.alibaba2.controller.UserController;
 import com.pooitec1.alibaba2.entity.Employee;
+import com.pooitec1.alibaba2.entity.User;
 
 /**
  *
@@ -16,12 +17,15 @@ import com.pooitec1.alibaba2.entity.Employee;
 public class JPanelAplication extends javax.swing.JPanel {
 
     UserController controlador;
-    Employee employee;
+    User user;
 
     /**
      * Creates new form JPanelAplication
      */
     public JPanelAplication(UserController controladorP) {
+        this.user = controladorP.getUserSelected();
+
+        System.out.println(this.user.getNickname());
         this.controlador = controladorP;
         initComponents();
         this.jlbl_userName.setText(this.controlador.getUserSelected().getNickname());
@@ -157,10 +161,17 @@ public class JPanelAplication extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtn_nuevaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_nuevaVentaActionPerformed
+
         //1-crear controlador
-        SaleController controlador = new SaleController(employee);
+        Employee employee = this.controlador.findByUser(this.controlador.getUserSelected());
+       // Employee employee = this.controlador.buscarByUser(this.controlador.getUserSelected());
+        
+       // System.out.println(this.controlador.getUserSelected().getEmployee().getId());
+        
+        
+        SaleController controladorVenta = new SaleController(employee);
         //2- crear panel enchufando el controlador creado en paso 1
-        JPanel_VentaPaso1 panelPaso1 = new JPanel_VentaPaso1(this, controlador);
+        JPanel_VentaPaso1 panelPaso1 = new JPanel_VentaPaso1(this, controladorVenta);
         // JPanel_VentaPaso1 panelPaso1 = new JPanel_VentaPaso1(this, controlador);
         panelPaso1.setSize(814, 600);
 
@@ -173,18 +184,15 @@ public class JPanelAplication extends javax.swing.JPanel {
     }//GEN-LAST:event_jbtn_nuevaVentaActionPerformed
 
     private void jbtn_nuevaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_nuevaCompraActionPerformed
-        PurchaseController controlador = new PurchaseController(employee);
+        //PurchaseController controladorVenta = new PurchaseController(employee);
 
-        JPanel_Comprapaso1 panelCPaso1 = new JPanel_Comprapaso1(this, controlador);
-
-        panelCPaso1.setSize(814, 600);
-
-        this.jPanel_contenido.removeAll();
-        this.jPanel_contenido.add(panelCPaso1);
-        this.repaint();
-        this.validate();
-
-        bloquearBotones(false);   // TODO add your handling code here:
+        // JPanel_Comprapaso1 panelCPaso1 = new JPanel_Comprapaso1(this, controladorVenta);
+        // panelCPaso1.setSize(814, 600);
+        //this.jPanel_contenido.removeAll();
+        // this.jPanel_contenido.add(panelCPaso1);
+        //  this.repaint();
+        // this.validate();
+        //  bloquearBotones(false);   // TODO add your handling code here:
     }//GEN-LAST:event_jbtn_nuevaCompraActionPerformed
 
 

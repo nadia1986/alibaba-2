@@ -5,6 +5,7 @@
 package com.pooitec1.alibaba2.service;
 
 import com.pooitec1.alibaba2.entity.Buyer;
+import com.pooitec1.alibaba2.entity.LoteProduct;
 import com.pooitec1.alibaba2.entity.Product;
 import com.pooitec1.alibaba2.entity.Sale;
 import com.pooitec1.alibaba2.entity.repository.Conexion;
@@ -19,18 +20,18 @@ import java.util.List;
 public class SaleService {
 
     private final SaleRepository saleRepository;
-   // private final LoteProductService stockService;
+    private final LoteProductService stockService;
     private final BuyerService buyerService;
-    private final ProductService service;
+    private final ProductService serviceProduct;
 
     
     
     public SaleService() {
 
         this.saleRepository = new SaleRepository(Conexion.getEmf());
-        //this.stockService = new LoteProductService();
+        this.stockService = new LoteProductService();
         this.buyerService = new BuyerService();
-        this.service = new ProductService();
+        this.serviceProduct = new ProductService();
 
     }
 
@@ -41,17 +42,38 @@ public class SaleService {
     public List<Buyer> findAllBuyer() {
         return buyerService.getBuyer();
     }
+    
+    
+    
+    //llamo al servicio de LoteService para buscar un producto por descripcion
+    
+    public List<LoteProduct> findProductByDescription(String descripcion) {
+        return stockService.findByProductDescription(descripcion);
+    }
+    
+    // Retorna una lista de todos los lotes
+    public List<LoteProduct> findAllLoteProduct(){
+        return stockService.getLoteProduct();
+    }
+    
+    
+    
+    
 
-    public List<Product> findProductByDescription(String description) {
-        return service.findByDescriptionProduct(description);
+    public List<LoteProduct> findByProduct(Product product) {
+        return stockService.findByProduct(product);
     }
 
     public List<Product> findProductByCode(String code) {
-        return service.findByCodeProduct(code);
+        return serviceProduct.findByCodeProduct(code);
+    }
+    
+     public Product findOneProductByDescription(String description) {
+        return serviceProduct.getOneProduct(description);
     }
 
     public List<Product> findAllProduct() {
-        return service.getProduct();
+        return serviceProduct.getProduct();
     }
 
     public  void saveSale(Sale sale) {

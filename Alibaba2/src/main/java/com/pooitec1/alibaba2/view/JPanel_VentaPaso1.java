@@ -26,6 +26,7 @@ public class JPanel_VentaPaso1 extends javax.swing.JPanel {
     private Buyer buyerSeleccionado;
 
     SaleController controlador;
+
     private JPanelAplication panelMenu;
 
     /**
@@ -38,8 +39,8 @@ public class JPanel_VentaPaso1 extends javax.swing.JPanel {
 
         this.controlador = controladorP;
         this.panelMenu = panelMenu;
+        
         initComponents();
-
         this.jtb_buyers.getSelectionModel().addListSelectionListener(new TableModelListenerBuyer(this));
 
         validadarCampos();
@@ -149,8 +150,8 @@ public class JPanel_VentaPaso1 extends javax.swing.JPanel {
                         .addGap(48, 48, 48)
                         .addComponent(jbtn_cancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtn_siguientepaso1)
-                        .addGap(142, 142, 142))
+                        .addComponent(jbtn_siguientepaso1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(127, 127, 127))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -225,7 +226,8 @@ public class JPanel_VentaPaso1 extends javax.swing.JPanel {
     private void jbtn_siguientepaso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_siguientepaso1ActionPerformed
         if (this.buyerSeleccionado != null) {
             this.controlador.getNewSale().setBuyer(buyerSeleccionado);
-             JPanel_VentaPaso2 panelPaso2 = new JPanel_VentaPaso2(this.panelMenu, this.controlador);
+
+            JPanel_VentaPaso2 panelPaso2 = new JPanel_VentaPaso2(this.panelMenu, this.controlador);
 
             panelPaso2.setSize(814, 600);
             this.panelMenu.limpiarPanelContenido();
@@ -239,7 +241,7 @@ public class JPanel_VentaPaso1 extends javax.swing.JPanel {
         }
         // TODO add your handling code here:
     }//GEN-LAST:event_jbtn_siguientepaso1ActionPerformed
-   
+
     private void jtx_buyerDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtx_buyerDniActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtx_buyerDniActionPerformed

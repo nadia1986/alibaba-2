@@ -23,6 +23,8 @@ public class ProductService {
 
         this.repository = new ProductRepository(Conexion.getEmf());
     }
+    
+    
 
     public List<Product> findByCodeProduct(String code) {
         List<Product> productsfound = new ArrayList<>();
@@ -50,6 +52,18 @@ public class ProductService {
         List<Product> listProducts = repository.findProductEntities();
         return listProducts;
 
+    }
+    
+    public Product getOneProduct(String codProduct){
+         Product oneProduct =null;
+        for (Product productSearch : repository.findProductEntities()) {
+            if (productSearch.getCodProd().contains(codProduct)) {
+               oneProduct = productSearch;
+            }
+        } 
+        
+        return oneProduct;
+        
     }
 
 }

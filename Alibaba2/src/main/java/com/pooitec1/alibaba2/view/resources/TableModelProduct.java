@@ -5,6 +5,7 @@
 package com.pooitec1.alibaba2.view.resources;
 
 
+import com.pooitec1.alibaba2.entity.LoteProduct;
 import com.pooitec1.alibaba2.entity.Product;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +16,17 @@ import javax.swing.table.AbstractTableModel;
  * @author nadia
  */
 public class TableModelProduct extends AbstractTableModel {
-     private static final String[] COLUMNAS = {"Cod_prod", "Descrption", "ProductType", "StockProduct", "Precio"};
-    private List<Product> products;
+    private static final String[] COLUMNAS = {"Cod_prod", "Producto", "Descripcion", "StockProduct ", "Precio"};
+    private List<LoteProduct> loteProducts;
     
 
     public TableModelProduct() {
-        products = new ArrayList<>();
+        loteProducts = new ArrayList<>();
     }
 
     @Override
     public int getRowCount() {        
-        return products == null ? 0 : products.size();
+        return loteProducts == null ? 0 : loteProducts.size();
     }
 
     @Override
@@ -36,25 +37,25 @@ public class TableModelProduct extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Object retorno = null;
-        Product product = products.get(rowIndex);
+        LoteProduct loteProduct = loteProducts.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
-                retorno = product.getCodProd();
+                retorno = loteProduct.getProduct().getCodProd();
                 break;
             case 1:
-                retorno = product.getDescription();
+                retorno = loteProduct.getProduct().getDescription();
                 break;
             case 2:
-                retorno = product.getProductType().getDescription();
+                retorno = loteProduct.getProduct().getProductType().getDescription();
                 break;
             
-            //case 3:
-               // retorno= product.getStockProduct().getQuantity();
-                //break;
-           // case 4:
-                //retorno=product.getStockProduct().getSalePrice();
-               // break;
+            case 3:
+               retorno= loteProduct.getCantidadActual();
+                break;
+           case 4:
+                retorno=loteProduct.getSalePrice();
+                break;
         }
         return retorno;
     }
@@ -64,20 +65,20 @@ public class TableModelProduct extends AbstractTableModel {
         return COLUMNAS[column];
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setProducts(List<LoteProduct> loteProducts) {
+        this.loteProducts = loteProducts;
     }
 
-    public Product getProductIn (int row) {
-        return products.get(row);
+    public LoteProduct getProductIn (int row) {
+        return loteProducts.get(row);
     }
 
-    public int findRowProduct(Product productSearch){
+    public int findRowProduct(LoteProduct productSearch){
         int row = 0;
         int accountant = 0;
-        for (Product productR : products) {
+        for (LoteProduct loteR : loteProducts) {
             accountant = accountant +1;
-            if (productSearch.getCodProd()==productR.getCodProd()) {
+            if (productSearch.getProduct().getDescription()==loteR.getProduct().getDescription()) {
                 row = accountant;
             }
         }

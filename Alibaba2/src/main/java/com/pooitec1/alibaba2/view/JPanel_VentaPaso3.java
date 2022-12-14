@@ -5,6 +5,7 @@
 package com.pooitec1.alibaba2.view;
 
 import com.pooitec1.alibaba2.controller.SaleController;
+import com.pooitec1.alibaba2.entity.LoteProduct;
 import com.pooitec1.alibaba2.entity.Product;
 import com.pooitec1.alibaba2.view.resources.TableModelListenerProduct;
 import com.pooitec1.alibaba2.view.resources.TableModelProduct;
@@ -23,7 +24,7 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
     //variables de tabla
     private final TableModelProduct tableModelProduct;
 
-    private Product productSelected;
+    private LoteProduct loteProductSelected;
 
     SaleController controlador;
     private JPanelAplication panelMenu;
@@ -38,10 +39,14 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
 
         this.controlador = controladorP;
         this.panelMenu = panelMenu;
+        
+        
         initComponents();
-
+        
         this.jtbl_products.getSelectionModel().addListSelectionListener(new TableModelListenerProduct(this));
+       
         validadarCampos();
+        
         setupBotones();
     }
 
@@ -71,7 +76,7 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
         setBackground(new java.awt.Color(204, 204, 255));
 
         jlbl_prodcutname.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jlbl_prodcutname.setText("Product Name");
+        jlbl_prodcutname.setText("Product Description");
 
         jtbl_products.setModel(tableModelProduct);
         jScrollPane1.setViewportView(jtbl_products);
@@ -94,6 +99,11 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
 
         jbtn_agregarproduct.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jbtn_agregarproduct.setText("ADD");
+        jbtn_agregarproduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_agregarproductActionPerformed(evt);
+            }
+        });
 
         jlbl_descripcion.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jlbl_descripcion.setText("Description:");
@@ -104,7 +114,11 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
         jlbl_precio.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jlbl_precio.setText("Price:");
 
-        jtxf_productname.setText("jTextField1");
+        jtxf_productname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxf_productnameActionPerformed(evt);
+            }
+        });
         jtxf_productname.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtxf_productnameKeyReleased(evt);
@@ -161,7 +175,7 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
                 .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbl_prodcutname)
-                    .addComponent(jtxf_productname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxf_productname, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(67, 67, 67)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +193,7 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbl_precio)
                     .addComponent(JLbl_price))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtn_cancelarventapaso3)
                     .addComponent(jbtn_atrasventapaso3)
@@ -216,6 +230,14 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
         }// TODO add your handling code here:
     }//GEN-LAST:event_jtxf_productnameKeyReleased
 
+    private void jtxf_productnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxf_productnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxf_productnameActionPerformed
+
+    private void jbtn_agregarproductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_agregarproductActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtn_agregarproductActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLbl_descripcion;
@@ -241,16 +263,16 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
         int filaSeleccionada = this.jtbl_products.getSelectedRow();
         // si la fila esta seleccionada, seteamos  buyer auxiliar, llamando al modelo de tabla
         if (filaSeleccionada >= 0) {
-            this.productSelected = this.tableModelProduct.getProductIn(filaSeleccionada);
-            this.JLbl_descripcion.setText(this.productSelected.getDescription());
-            this.JLbl_productType.setText(this.productSelected.getProductType().getDescription());
-            //this.jlbl_price.setText(this.productSelected.getStockProduct().getPrice());
+            this.loteProductSelected = this.tableModelProduct.getProductIn(filaSeleccionada);
+            this.JLbl_descripcion.setText(this.loteProductSelected.getProduct().getCodProd());
+            this.JLbl_productType.setText(this.loteProductSelected.getProduct().getProductType().getDescription());
+          //  this.JLbl_price.setText(this.loteProductSelected.getSalePrice());
 
         }
     }
 
     private void validadarCampos() {
-        this.validadorDeCampos.validarSoloNumero(jtxf_productname);
+        this.validadorDeCampos.validarSoloLetras(jtxf_productname);
         this.validadorDeCampos.LimitarCaracteres(jtxf_productname, 20);
     }
 

@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -43,6 +44,11 @@ public class User implements Serializable {
     )
     @ManyToMany
     private List<Rol> rols;
+    
+    @ManyToOne
+    private Employee employee;
+    
+    
 
     public Long getId() {
         return id;
@@ -99,6 +105,14 @@ public class User implements Serializable {
 
     public void setRols(List<Rol> rols) {
         this.rols = rols;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
 }
