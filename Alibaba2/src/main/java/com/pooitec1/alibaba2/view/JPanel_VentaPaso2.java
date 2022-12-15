@@ -5,6 +5,7 @@
 package com.pooitec1.alibaba2.view;
 
 import com.pooitec1.alibaba2.controller.SaleController;
+import com.pooitec1.alibaba2.view.resources.TableModelDetalleVenta;
 import com.pooitec1.alibaba2.view.resources.ValidadorDeCampos;
 
 /**
@@ -18,7 +19,7 @@ public class JPanel_VentaPaso2 extends javax.swing.JPanel {
     ValidadorDeCampos validadorDeCampos;
     
     //variables de tabla
-   // private final TableModelLibro tableModelLibro;
+    private final TableModelDetalleVenta tableModelDetalleVenta;
 
    // private Book libroSeleccionado;
 
@@ -35,7 +36,7 @@ public class JPanel_VentaPaso2 extends javax.swing.JPanel {
     public JPanel_VentaPaso2(JPanelAplication panelMenu, SaleController controladorP) {
         this.validadorDeCampos = new ValidadorDeCampos();
         
-        //this.tableModelLibro = new TableModelLibro();
+        this.tableModelDetalleVenta = new TableModelDetalleVenta();
 
         this.controlador = controladorP;
         this.panelMenu = panelMenu;
@@ -100,22 +101,7 @@ public class JPanel_VentaPaso2 extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel6.setText("SALE DETAIL");
 
-        jTable_lineadeventa.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "CodeProduct", "Description", "Price", "Sub_Total"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        jTable_lineadeventa.setModel(tableModelDetalleVenta);
         jScrollPane1.setViewportView(jTable_lineadeventa);
         if (jTable_lineadeventa.getColumnModel().getColumnCount() > 0) {
             jTable_lineadeventa.getColumnModel().getColumn(0).setPreferredWidth(30);

@@ -105,17 +105,17 @@ public class JPanelLogin extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_loginActionPerformed
-         this.userAux = new User();
+        this.userAux = new User();
         this.userAux.setNickname(jtf_user.getText());
         this.userAux.setPassword(jtf_password.getText());
 
-        System.out.println(userAux.getNickname()+" "+ userAux.getPassword());
+        System.out.println(userAux.getNickname() + " " + userAux.getPassword());
 
-        if (this.controller.login(userAux)!= null){
+        if (this.controller.login(userAux) != null) {
             this.controller.setUserSelected(userAux);
             JFrameAplication principal = new JFrameAplication(this.controller);
             this.frame.dispose();
-        }else {
+        } else {
             //this.jbtn_login.setText("Error");
             JOptionPane.showMessageDialog(null, "User or Password incorrect");
         }

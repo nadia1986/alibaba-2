@@ -25,7 +25,7 @@ public class LoteProduct implements Serializable {
     private Long idLote;
 
     private int quantity;
-    private Integer cantidadActual;
+    private int cantidadActual;
     private int stockMin;
     private LocalDate expiration;
     private int stockMax;
@@ -163,11 +163,11 @@ public class LoteProduct implements Serializable {
         this.price = price;
     }
 
-    public Integer getCantidadActual() {
+    public int getCantidadActual() {
         return cantidadActual;
     }
 
-    public void setCantidadActual(Integer cantidadActual) {
+    public void setCantidadActual(int cantidadActual) {
         this.cantidadActual = cantidadActual;
     }
     

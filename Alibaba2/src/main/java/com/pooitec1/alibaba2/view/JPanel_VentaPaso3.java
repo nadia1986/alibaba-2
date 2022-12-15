@@ -7,10 +7,12 @@ package com.pooitec1.alibaba2.view;
 import com.pooitec1.alibaba2.controller.SaleController;
 import com.pooitec1.alibaba2.entity.LoteProduct;
 import com.pooitec1.alibaba2.entity.Product;
+import com.pooitec1.alibaba2.entity.SaleLine;
 import com.pooitec1.alibaba2.view.resources.TableModelListenerProduct;
 import com.pooitec1.alibaba2.view.resources.TableModelProduct;
 import com.pooitec1.alibaba2.view.resources.ValidadorDeCampos;
 import java.awt.Color;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -39,15 +41,14 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
 
         this.controlador = controladorP;
         this.panelMenu = panelMenu;
-        
-        
+
         initComponents();
-        
+
         this.jtbl_products.getSelectionModel().addListSelectionListener(new TableModelListenerProduct(this));
-       
+        this.jsp_cantidad.setEnabled(false);
+
         validadarCampos();
-        
-        setupBotones();
+
     }
 
     /**
@@ -62,7 +63,6 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
         jlbl_prodcutname = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtbl_products = new javax.swing.JTable();
-        jbtn_cancelarventapaso3 = new javax.swing.JButton();
         jbtn_atrasventapaso3 = new javax.swing.JButton();
         jbtn_agregarproduct = new javax.swing.JButton();
         jlbl_descripcion = new javax.swing.JLabel();
@@ -72,6 +72,8 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
         JLbl_descripcion = new javax.swing.JLabel();
         JLbl_productType = new javax.swing.JLabel();
         JLbl_price = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jsp_cantidad = new javax.swing.JSpinner();
 
         setBackground(new java.awt.Color(204, 204, 255));
 
@@ -80,14 +82,6 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
 
         jtbl_products.setModel(tableModelProduct);
         jScrollPane1.setViewportView(jtbl_products);
-
-        jbtn_cancelarventapaso3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jbtn_cancelarventapaso3.setText("CANCEL");
-        jbtn_cancelarventapaso3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_cancelarventapaso3ActionPerformed(evt);
-            }
-        });
 
         jbtn_atrasventapaso3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jbtn_atrasventapaso3.setText("BACK");
@@ -131,6 +125,15 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
 
         JLbl_price.setText("jLabel3");
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel1.setText("Cantidad");
+
+        jsp_cantidad.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jsp_cantidadStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,11 +154,13 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlbl_precio)
                                 .addGap(40, 40, 40)
-                                .addComponent(JLbl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(JLbl_price, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jsp_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jbtn_cancelarventapaso3)
-                        .addGap(134, 134, 134)
+                        .addGap(262, 262, 262)
                         .addComponent(jbtn_atrasventapaso3)
                         .addGap(131, 131, 131)
                         .addComponent(jbtn_agregarproduct))
@@ -193,19 +198,17 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbl_precio)
                     .addComponent(JLbl_price))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jsp_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtn_cancelarventapaso3)
                     .addComponent(jbtn_atrasventapaso3)
                     .addComponent(jbtn_agregarproduct))
                 .addGap(49, 49, 49))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbtn_cancelarventapaso3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarventapaso3ActionPerformed
-        this.panelMenu.bloquearBotones(true);
-        this.panelMenu.limpiarPanelContenido(); // TODO add your handling code here:
-    }//GEN-LAST:event_jbtn_cancelarventapaso3ActionPerformed
 
     private void jbtn_atrasventapaso3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_atrasventapaso3ActionPerformed
         JPanel_VentaPaso2 panelPaso2 = new JPanel_VentaPaso2(this.panelMenu, this.controlador);
@@ -223,10 +226,14 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
     private void jtxf_productnameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxf_productnameKeyReleased
         if (this.jtxf_productname.isEditable()) {
             //Actualizar el TableModel con la lista del controlador
-             this.tableModelProduct.setProducts(this.controlador.findProductByDescription(this.jtxf_productname.getText()));
+            this.tableModelProduct.setProducts(this.controlador.findProductByDescription(this.jtxf_productname.getText()));
 
-            //Refrescar el modelo en la tabla
+         //Refrescar el modelo en la tabla
             this.tableModelProduct.fireTableDataChanged();
+            
+            this.jsp_cantidad.setEnabled(false);
+            SpinnerNumberModel model1 = new SpinnerNumberModel(0, 0, 0, 1);
+            this.jsp_cantidad.setModel(model1);
         }// TODO add your handling code here:
     }//GEN-LAST:event_jtxf_productnameKeyReleased
 
@@ -235,22 +242,41 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
     }//GEN-LAST:event_jtxf_productnameActionPerformed
 
     private void jbtn_agregarproductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_agregarproductActionPerformed
-        // TODO add your handling code here:
+       SaleLine newSaleLine= new SaleLine();
+      if ((int) jsp_cantidad.getValue()>0){
+          newSaleLine.setProduct(loteProductSelected.getProduct());
+          newSaleLine.setQuantity((int) jsp_cantidad.getValue());
+          this.controlador.addProduct(newSaleLine);
+          JPanel_VentaPaso2 panelPaso2 = new JPanel_VentaPaso2(this.panelMenu, this.controlador);
+
+            panelPaso2.setSize(814, 600);
+            this.panelMenu.limpiarPanelContenido();
+
+            this.panelMenu.getjPanel_contenido().add(panelPaso2);
+            this.panelMenu.repaint();
+            this.panelMenu.validate();
+          
+      }
     }//GEN-LAST:event_jbtn_agregarproductActionPerformed
+
+    private void jsp_cantidadStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jsp_cantidadStateChanged
+        System.out.println("");        // TODO add your handling code here:
+    }//GEN-LAST:event_jsp_cantidadStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLbl_descripcion;
     private javax.swing.JLabel JLbl_price;
     private javax.swing.JLabel JLbl_productType;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtn_agregarproduct;
     private javax.swing.JButton jbtn_atrasventapaso3;
-    private javax.swing.JButton jbtn_cancelarventapaso3;
     private javax.swing.JLabel jlbl_descripcion;
     private javax.swing.JLabel jlbl_precio;
     private javax.swing.JLabel jlbl_prodcutname;
     private javax.swing.JLabel jlbl_tipoproducto;
+    private javax.swing.JSpinner jsp_cantidad;
     private javax.swing.JTable jtbl_products;
     private javax.swing.JTextField jtxf_productname;
     // End of variables declaration//GEN-END:variables
@@ -266,7 +292,11 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
             this.loteProductSelected = this.tableModelProduct.getProductIn(filaSeleccionada);
             this.JLbl_descripcion.setText(this.loteProductSelected.getProduct().getCodProd());
             this.JLbl_productType.setText(this.loteProductSelected.getProduct().getProductType().getDescription());
-          //  this.JLbl_price.setText(this.loteProductSelected.getSalePrice());
+             this.JLbl_price.setText("$" + this.loteProductSelected.getSalePrice());
+            this.jsp_cantidad.setEnabled(true);
+            SpinnerNumberModel model1 = new SpinnerNumberModel(1, 1, this.loteProductSelected.getCantidadActual(), 1);
+            this.jsp_cantidad.setModel(model1);
+           // this.jsp_cantidad.setEnabled(false);
 
         }
     }
@@ -274,10 +304,6 @@ public class JPanel_VentaPaso3 extends javax.swing.JPanel {
     private void validadarCampos() {
         this.validadorDeCampos.validarSoloLetras(jtxf_productname);
         this.validadorDeCampos.LimitarCaracteres(jtxf_productname, 20);
-    }
-
-    private void setupBotones() {
-        this.validadorDeCampos.habilitarBoton(true, jbtn_cancelarventapaso3, new Color(176, 128, 118), Color.WHITE, Color.GRAY, Color.BLACK);
     }
 
 }
